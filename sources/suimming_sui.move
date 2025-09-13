@@ -59,9 +59,10 @@ fun test_submit_transaction() {
     let msg = string(b"test msg");
     let timestamp = string(b"2345678");
     submit_transaction(&mut book, msg, &mut ctx, timestamp);
+    submit_transaction(&mut book, string(b"test msg2"), &mut ctx, string(b"123456789"));
 
     let txs = get_all_transactions(&book);
-    assert!(vector::length(txs) == 1, 101);
+    assert!(vector::length(txs) == 2, 101);
     let t = vector::borrow(txs, 0);
     assert!(t.sender == ctx.sender(), 102);
     assert!(t.message == msg, 103);
