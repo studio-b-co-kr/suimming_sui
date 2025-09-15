@@ -21,8 +21,9 @@ sui faucet
 ```
 sui client publish
 ```
-Output
-```
+<details>
+<summary>Console Output</summary>
+<pre>
 Transaction Digest: 2anVerZQL4daLtViyr7SKmACnuwtuuZtPaWCgah4XV39
 ╭──────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
 │ Transaction Data                                                                                             │
@@ -166,4 +167,5 @@ Transaction Digest: 2anVerZQL4daLtViyr7SKmACnuwtuuZtPaWCgah4XV39
 │  │ Amount: -11452280                                                                              │
 │  └──                                                                                              │
 ╰───────────────────────────────────────────────────────────────────────────────────────────────────╯
-```
+</pre>
+</details>
