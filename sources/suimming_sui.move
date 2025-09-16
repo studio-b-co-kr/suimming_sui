@@ -29,8 +29,8 @@ fun init(ctx: &mut TxContext) {
 public fun submit_transaction(
     book: &mut TransactionBook,
     message: String,
-    ctx: &mut TxContext,
     timestamp: String,
+    ctx: &mut TxContext,
 ) {
     let transaction = UserTransaction {
         id: object::new(ctx),
@@ -58,8 +58,8 @@ fun test_submit_transaction() {
     };
     let msg = string(b"test msg");
     let timestamp = string(b"2345678");
-    submit_transaction(&mut book, msg, &mut ctx, timestamp);
-    submit_transaction(&mut book, string(b"test msg2"), &mut ctx, string(b"123456789"));
+    submit_transaction(&mut book, msg, timestamp, &mut ctx);
+    submit_transaction(&mut book, string(b"test msg2"), string(b"123456789"), &mut ctx);
 
     let txs = get_all_transactions(&book);
     assert!(vector::length(txs) == 2, 101);

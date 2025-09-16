@@ -15,7 +15,7 @@ RUST_LOG="off,sui_node=info" sui start --with-faucet --force-regenesis
 ```
 ### Request Sui to pay gas for deployment
 ```
-sui faucet
+sui client faucet
 ```
 ### Deploy Locally
 ```
