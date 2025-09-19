@@ -6,7 +6,12 @@ use std::ascii::{String, string};
 public struct UserTransaction has key, store {
     id: UID,
     sender: address,
-    message: String,
+    side: String,
+    price: String,
+    quantity: String,
+    symbol: String,
+    exchange: String,
+    filled_at: String,
     timestamp: String,
 }
 
@@ -28,14 +33,24 @@ fun init(ctx: &mut TxContext) {
 
 public fun submit_transaction(
     book: &mut TransactionBook,
-    message: String,
+    side: String,
+    price: String,
+    quantity: String,
+    symbol: String,
+    exchange: String,
+    filled_at: String,
     timestamp: String,
     ctx: &mut TxContext,
 ) {
     let transaction = UserTransaction {
         id: object::new(ctx),
         sender: ctx.sender(),
-        message: message,
+        side: side,
+        price: price,
+        quantity: quantity,
+        symbol: symbol,
+        exchange: exchange,
+        filled_at: filled_at,
         timestamp: timestamp,
     };
     debug::print(book);
@@ -56,16 +71,22 @@ fun test_submit_transaction() {
         admin: ctx.sender(),
         transactions: vector::empty<UserTransaction>(),
     };
-    let msg = string(b"test msg");
+    
+    let side = string(b"sell");
+    let price = string(b"123.45");
+    let quantity = string(b"0.01");
+    let symbol = string(b"BTCUSD");
+    let exchange = string(b"Binance");
+    let filled_at = string(b"2023-10-01T12:34");
     let timestamp = string(b"2345678");
-    submit_transaction(&mut book, msg, timestamp, &mut ctx);
-    submit_transaction(&mut book, string(b"test msg2"), string(b"123456789"), &mut ctx);
+    submit_transaction(&mut book, side, price, quantity, symbol, exchange, filled_at, timestamp, &mut ctx);
+    
 
     let txs = get_all_transactions(&book);
-    assert!(vector::length(txs) == 2, 101);
+    assert!(vector::length(txs) == 1, 101);
     let t = vector::borrow(txs, 0);
     assert!(t.sender == ctx.sender(), 102);
-    assert!(t.message == msg, 103);
+    assert!(t.side == side, 103);
     assert!(t.timestamp == timestamp, 103);
 
     let dummy_address = @0xCAFE;
