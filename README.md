@@ -1,14 +1,6 @@
-# Suimming Sui
+# Sui Package for SB Trader Project
 
-## Basic Commands
-### Create Project
-```
-sui move new suimming_sui 
-```
-### Test
-```
-sui move test 
-```
+## Running Locally
 ### Run Sui locally
 ```
 RUST_LOG="off,sui_node=info" sui start --with-faucet --force-regenesis
